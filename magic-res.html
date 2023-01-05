@@ -9,10 +9,12 @@
     <title>Magic Reservations</title>
   </head>
   <body>
+    <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    
     
     <div class="bootstrap-iso">
       <div class="container-fluid">
@@ -20,15 +22,8 @@
         
         <h1 text-align="center">Magic Reservations Date Selector </h1>
         
-        <div class="col-md-3 col-sm-5 col-xs-7">
-          
-          
-        </div>
-      
-      
-    
-  
-        <div class="col-md-3 col-sm-5 col-xs-7">      
+        
+       <div class="col-md-3 col-sm-5 col-xs-7">      
           <div id="Resort"><label for="selectResort">Desired Disney Resort</label><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="selectResort" name='selectResort' onchange='testResort(this.value)'>
         
       <option selected>Please Select Your Resort</option>
@@ -37,7 +32,7 @@
     </select>
     </div>
 
-    <div id="DLRkey" style="display:none">
+    <div id="DLRdrops" class="DLR hidden">
     <label for='selectDLRkey'>Your Key Level</label><select id = 'selectDLRkey' class="form-select form-select-sm" aria-label=".form-select-sm example" name='selectDLRkey'>
         
       <option selected> Please Select Your Pass</option>
@@ -47,9 +42,15 @@
       <option value="imagine"> Imagine Key</option>
       <option value="imagine"> Imagine Key</option>
       </select>
+      <label for='selectDLRpark'>Desired Park</label><select class="form-select form-select-sm" id='selectDLRpark' aria-label=".form-select-sm example" name='selectDLRpark'>
+      
+        <option selected> Please Select Your Park</option>
+        <option value="DLR_DP">Disneyland</option>
+        <option value="DLR_CA">California Adventure</option>
+        </select>
     </div>
 
-    <div id="WDWpass" style="display:none">
+    <div id="WDWdrops" class="WDW hidden">
     <label for="selectWDWpass" >Your Pass Level</label><select class="form-select form-select-sm" id = 'selectWDWpass' aria-label=".form-select-sm example" name='selectWDWpass'>
       <option selected>Please Select your Pass</option>
       <option value="incredipass"> Incredi-Pass</option>
@@ -57,123 +58,35 @@
       <option value="pirate">Pirate Pass</option>
       <option value="pixie">Pixie Dust Pass</option>
     </select>
+      <label for='selectWDWpark'>Desired Park</label><select class="form-select form-select-sm" id='selectWDWpark' aria-label=".form-select-sm example" name='selectWDWPark'>
+        <option selected> Please Select Your Park</option>
+        <option value="WDW_MK">Magic Kingdom</option>
+        <option value="WDW_EP">EPCOT</option>
+        <option value="WDW_HS">Hollywood Studios</option>
+        <option value="WDW_AK">Animal Kingdom</option>
+        </select>
     </div>
-   
-    <div id="DLRpark" style="display:none">
-    <label for='selectDLRpark'>Desired Park</label><select class="form-select form-select-sm" id='selectDLRpark' aria-label=".form-select-sm example" name='selectDLRpark'>
-      
-      <option selected> Please Select Your Park</option>
-      <option value="DLR_DP">Disneyland</option>
-      <option value="DLR_CA">California Adventure</option>
-      </select>
-    </div>
-
-    <div id="WDWpark" style="display:none">
-    <label for='selectWDWpark'>Desired Park</label><select class="form-select form-select-sm" id='selectWDWpark' aria-label=".form-select-sm example" name='selectWDWPark'>
-      <option selected> Please Select Your Park</option>
-      <option value="WDW_MK">Magic Kingdom</option>
-      <option value="WDW_EP">EPCOT</option>
-      <option value="WDW_HS">Hollywood Studios</option>
-      <option value="WDW_AK">Animal Kingdom</option>
-      </select>
-    </div>
+    
+ 
 
 
     
     
 
      
-         <!-- Form code begins -->
          
-           <div class="form-group"style="display:none" id="calendarForm"> <!-- Date input -->
+           <div class="form-group" class="datepicker" id="calendarForm"> <!-- Date input -->
              <label class="control-label" for="date">Select your Date</label>
              <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" readonly="true"/>
            </div>
-           <div class="form-group"style="display:none" id = 'selectDate'> <!-- Submit button -->
+           <div class="form-group" id = 'selectDate'> <!-- Submit button -->
              <button class="btn btn-primary " name="submit" type="submit" id="subButton" onclick='submitForm()'>Submit</button>
            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-          <!-- Form code ends --> 
-          <script>
-            $(document).ready(function(){
-              var date_input=$('input[name="date"]'); //our date input has the name "date"
-              var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-              var options={
-                format: 'mm/dd/yyyy',
-                container: container,
-                todayHighlight: true,
-                autoclose: true,
-                startDate: '+1d',
-                endDate: '+90d',
-              };
-              date_input.datepicker(options);
-            })
-
-            function testResort(val) {
-              if(val=='DLR'){
-                
-                showDLRdrops();
-              }
-              else if (val=='WDW'){
-                
-                showWDWdrops();
-              }
-            }
-            function showDLRdrops(){
-              document.getElementById('DLRkey').style.display = 'block';
-              document.getElementById('DLRpark').style.display = 'block';
-              
-              document.getElementById('selectDate').style.display = 'block';
-              document.getElementById('calendarForm').style.display = 'block';
-              document.getElementById('subButton').style.display = 'block';
-              document.getElementById('WDWpass').style.display = 'none';
-              document.getElementById('WDWpark').style.display = 'none';
-
-            }
-
-            function showWDWdrops(){
-              document.getElementById('WDWpass').style.display = 'block';
-              document.getElementById('WDWpark').style.display = 'block';
-              document.getElementById('selectDate').style.display = 'block';
-              document.getElementById('calendarForm').style.display = 'block';
-              document.getElementById('subButton').style.display = 'block';
-              document.getElementById('DLRkey').style.display = 'none';
-              document.getElementById('DLRpark').style.display = 'none';
-             
-            }
-
-            function submitForm(){
-              resort = document.querySelector('#selectResort').value;
-            
-              if (resort=='DLR'){
-                pass = document.querySelector('#selectDLRkey').value
-                park = document.querySelector('#selectDLRpark').value
-              }else if (resort=='WDW'){
-                pass = document.querySelector('#selectWDWpass').value
-                park = document.querySelector('#selectWDWpark').value
-              }
-              parkDate=document.querySelector('#date').value
-              
-              const result = new userData(resort, pass, park, parkDate);
-              console.log(result);
-              
-            }
-            function userData(resort, pass, park, parkDate){
-              
-              this.resort = resort;
-              this.pass = pass;
-              this.park = park;
-              this.date = parkDate;
-            }
-            
-        </script>
      
-         </div>
-       </div>    
-      </div>
-     </div>
+     
+      
+     <script src="magic-res.js">
+
+     </script>
       </body>
       </html>
