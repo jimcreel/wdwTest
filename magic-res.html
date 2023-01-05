@@ -14,7 +14,22 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     
-    <div id="Resort"><label for="selectResort">Desired Disney Resort</label><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="selectResort" name='selectResort' onchange='testResort(this.value)'>
+    <div class="bootstrap-iso">
+      <div class="container-fluid">
+       <div class="row">
+        
+        <h1 text-align="center">Magic Reservations Date Selector </h1>
+        
+        <div class="col-md-3 col-sm-5 col-xs-7">
+          
+          
+        </div>
+      
+      
+    
+  
+        <div class="col-md-3 col-sm-5 col-xs-7">      
+          <div id="Resort"><label for="selectResort">Desired Disney Resort</label><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="selectResort" name='selectResort' onchange='testResort(this.value)'>
         
       <option selected>Please Select Your Resort</option>
       <option value="DLR"> Disneyland Resort</option>
@@ -35,7 +50,7 @@
     </div>
 
     <div id="WDWpass" style="display:none">
-    <label for="selectWDWpass" >Your Pass Level</label><select class="form-select form-select-sm" id = 'selectWDWkey' aria-label=".form-select-sm example" name='selectWDWpass'>
+    <label for="selectWDWpass" >Your Pass Level</label><select class="form-select form-select-sm" id = 'selectWDWpass' aria-label=".form-select-sm example" name='selectWDWpass'>
       <option selected>Please Select your Pass</option>
       <option value="incredipass"> Incredi-Pass</option>
       <option value="sorcerer"> Sorcerer Pass</option>
@@ -66,21 +81,21 @@
 
     
     
-    <div class="bootstrap-iso">
-      <div class="container-fluid">
-       <div class="row">
-        <div class="col-md-3 col-sm-5 col-xs-7">
+
      
          <!-- Form code begins -->
          
            <div class="form-group"style="display:none" id="calendarForm"> <!-- Date input -->
              <label class="control-label" for="date">Select your Date</label>
-             <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+             <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" readonly="true"/>
            </div>
            <div class="form-group"style="display:none" id = 'selectDate'> <!-- Submit button -->
-             <button class="btn btn-primary " name="submit" type="submit" id="subButton" onclick='submitForm()''>Submit</button>
+             <button class="btn btn-primary " name="submit" type="submit" id="subButton" onclick='submitForm()'>Submit</button>
            </div>
-          
+          </div>
+        </div>
+      </div>
+    </div>
           <!-- Form code ends --> 
           <script>
             $(document).ready(function(){
@@ -91,6 +106,8 @@
                 container: container,
                 todayHighlight: true,
                 autoclose: true,
+                startDate: '+1d',
+                endDate: '+90d',
               };
               date_input.datepicker(options);
             })
@@ -130,7 +147,7 @@
 
             function submitForm(){
               resort = document.querySelector('#selectResort').value;
-              console.log(resort);
+            
               if (resort=='DLR'){
                 pass = document.querySelector('#selectDLRkey').value
                 park = document.querySelector('#selectDLRpark').value
@@ -138,16 +155,20 @@
                 pass = document.querySelector('#selectWDWpass').value
                 park = document.querySelector('#selectWDWpark').value
               }
-              result = createJSON(resort, pass, park, date);
-              console.log(result.resort)
+              parkDate=document.querySelector('#date').value
+              
+              const result = new userData(resort, pass, park, parkDate);
+              console.log(result);
               
             }
-            function createJSON(resort, pass, park, date){
+            function userData(resort, pass, park, parkDate){
+              
               this.resort = resort;
               this.pass = pass;
               this.park = park;
-              this.date = date;
+              this.date = parkDate;
             }
+            
         </script>
      
          </div>
