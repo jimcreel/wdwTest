@@ -1,96 +1,197 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>Magic Reservations</title>
-  </head>
-  <body>
+		<link
+		
+			rel="stylesheet"
+			integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+			crossorigin="anonymous"
+		/>
+    <link rel="stylesheet" href="style.css" />
+		<script
+			type="text/javascript"
+			src="https://code.jquery.com/jquery-1.11.3.min.js"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"
+		></script>
+	
+    <script src="magic-res.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"
+		/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
-    
-    <div class="bootstrap-iso">
-      <div class="container-fluid">
-       <div class="col-lg-1 col-offset-6 centered" id="calendarSelector">
-        
-        <h1 text-align="center">Magic Reservations Date Selector </h1>
-        
-        
-        <div class="row">
-          <div class="center-block">     
-          <div id="Resort"><label for="selectResort">Desired Disney Resort</label><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="selectResort" name='selectResort' onchange='testResort(this.value)'>
-        
-            <option selected>Please Select Your Resort</option>
-            <option value="DLR"> Disneyland Resort</option>
-            <option value="WDW"> Walt Disney World</option>
-            </select>
-          </div>
-
-          <div id="DLRdrops" class="DLR hidden">
-           <label for='selectDLRkey'>Your Key Level</label><select id = 'selectDLRkey' class="form-select form-select-sm" aria-label=".form-select-sm example" name='selectDLRkey'>
-        
-            <option selected> Please Select Your Pass</option>
-            <option value="inspire"> Inspire Key</option>
-            <option value="believe"> Believe Key</option>
-            <option value="enchant"> Enchant Key</option>
-            <option value="imagine"> Imagine Key</option>
-            <option value="imagine"> Imagine Key</option>
-            </select>
-            <label for='selectDLRpark'>Desired Park</label><select class="form-select form-select-sm" id='selectDLRpark' aria-label=".form-select-sm example" name='selectDLRpark'>
+    <style>
+      /* Remove the navbar's default margin-bottom and rounded borders */ 
+      .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+      }
       
-              <option selected> Please Select Your Park</option>
-              <option value="DLR_DP">Disneyland</option>
-              <option value="DLR_CA">California Adventure</option>
-              </select>
-          </div>
-
-          <div id="WDWdrops" class="WDW hidden">
-          <label for="selectWDWpass" >Your Pass Level</label><select class="form-select form-select-sm" id = 'selectWDWpass' aria-label=".form-select-sm example" name='selectWDWpass'>
-            <option selected>Please Select your Pass</option>
-            <option value="incredipass"> Incredi-Pass</option>
-            <option value="sorcerer"> Sorcerer Pass</option>
-            <option value="pirate">Pirate Pass</option>
-            <option value="pixie">Pixie Dust Pass</option>
-          </select>
-            <label for='selectWDWpark'>Desired Park</label><select class="form-select form-select-sm" id='selectWDWpark' aria-label=".form-select-sm example" name='selectWDWPark'>
-              <option selected> Please Select Your Park</option>
-              <option value="WDW_MK">Magic Kingdom</option>
-              <option value="WDW_EP">EPCOT</option>
-              <option value="WDW_HS">Hollywood Studios</option>
-              <option value="WDW_AK">Animal Kingdom</option>
-              </select>
-          </div>
-          <div class="form-group" class="datepicker" id="calendarForm"> <!-- Date input -->
-            <label class="control-label" for="date">Select your Date</label>
-            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" readonly="true"/>
-          </div>
-          <div class="form-group" id = 'selectDate'> <!-- Submit button -->
-            <button class="btn btn-primary " name="submit" type="submit" id="subButton" onclick='submitForm()'>Submit</button>
-          </div>
+      /* Add a gray background color and some padding to the footer */
+      footer {
+        background-color: #f2f2f2;
+        padding: 25px;
+      }
+    </style>
+  </head>
+		<title>Magic Reservations</title>
+	</head>
+	<body>
+		
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+          </button>
+          <a class="navbar-brand" href="#">Portfolio</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
         </div>
       </div>
-    </div>
-    </div>
-  </body>
+    </nav>
+		<div class="bootstrap-iso">
+			<div class="container-fluid">
+        <div class="row">
+				<div class="col-xs-4">
+					<div id="calendarSelector">
+						<h1>Magic Reservations Date Selector</h1>
+							<div id="Resort">
+								<label for="selectResort">Desired Disney Resort</label
+								><select
+									class="form-select form-select-sm"
+									id="selectResort"
+									name="selectResort"
+									onchange="testResort(this.value)"
+								>
+									<option selected>Please Select Your Resort</option>
+									<option value="DLR">Disneyland Resort</option>
+									<option value="WDW">Walt Disney World</option>
+								</select>
+							</div>
 
-    
-    
+							<div id="DLRdrops" class="DLR hidden">
+								<label for="selectDLRkey">Your Key Level</label
+								><select
+									id="selectDLRkey"
+									class="form-select form-select-sm"
+									name="selectDLRkey"
+								>
+									<option selected>Please Select Your Pass</option>
+									<option value="inspire">Inspire Key</option>
+									<option value="believe">Believe Key</option>
+									<option value="enchant">Enchant Key</option>
+									<option value="imagine">Imagine Key</option>
+									<option value="imagine">Imagine Key</option>
+								</select>
+								<label for="selectDLRpark">Desired Park</label
+								><select
+									class="form-select form-select-sm"
+									id="selectDLRpark"
+									name="selectDLRpark"
+								>
+									<option selected>Please Select Your Park</option>
+									<option value="DLR_DP">Disneyland</option>
+									<option value="DLR_CA">California Adventure</option>
+								</select>
+							</div>
 
-     
-         
-           
-     
-     
-      
-     <script src="magic-res.js">
+							<div id="WDWdrops" class="WDW hidden">
+								<label for="selectWDWpass">Your Pass Level</label
+								><select
+									id="selectWDWpass"
+									name="selectWDWpass"
+                  class="form-select form-select-sm"
+								>
+									<option selected>Please Select your Pass</option>
+									<option value="incredipass">Incredi-Pass</option>
+									<option value="sorcerer">Sorcerer Pass</option>
+									<option value="pirate">Pirate Pass</option>
+									<option value="pixie">Pixie Dust Pass</option>
+								</select>
+								<label for="selectWDWpark">Desired Park</label
+								><select
+									class="form-select form-select-sm"
+									id="selectWDWpark"
+									name="selectWDWPark"
+								>
+									<option selected>Please Select Your Park</option>
+									<option value="WDW_MK">Magic Kingdom</option>
+									<option value="WDW_EP">EPCOT</option>
+									<option value="WDW_HS">Hollywood Studios</option>
+									<option value="WDW_AK">Animal Kingdom</option>
+								</select>
+							</div>
+							<div  class="datepicker" id="calendarForm">
+								<!-- Date input -->
+								<label class="control-label" for="date">Select your Date</label>
+								<input
+									
+									id="date"
+									name="date"
+									placeholder="MM/DD/YYYY"
+									type="text"
+									readonly="true"
+								/>
+							</div>
+							<div  id="selectDate">
+								<!-- Submit button -->
+								<button
+									class="btn btn-primary"
+									name="submit"
+									type="submit"
+									id="subButton"
+									onclick="submitForm()"
+								>
+									Submit
+								</button>
+							</div>
+            </div>
+            </div>
 
-     </script>
-      
-      </html>
+							<div class="col-xs-4">
+                <div class="card" style="width: 18rem;">
+                  <img src="..." class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Reservation Availability</h5>
+                    <p class="card-text">Reservations for (date) are(not) available for (pass)</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+                
+              </div>
+                
+
+							<div class="col-xs-4">three</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	
+</html>

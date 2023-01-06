@@ -67,5 +67,5 @@ function getResortData(url, park, pass) {
     
   }
   
-getDLRData(dlrUrl);
+
 

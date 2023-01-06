@@ -2,10 +2,8 @@
     display: none;
     visibility: hidden;
 }
-.form-group {
-    max-width: 250px;
-}
+
 
 #calendarSelector {
-    max-width: 175px;
+    max-width: 250px;
 }
