@@ -18,56 +18,66 @@
     
     <div class="bootstrap-iso">
       <div class="container-fluid">
-       <div class="row">
+       <div class="col-lg-1 col-offset-6 centered" id="calendarSelector">
         
         <h1 text-align="center">Magic Reservations Date Selector </h1>
         
         
-       <div class="col-md-3 col-sm-5 col-xs-7">      
+        <div class="row">
+          <div class="center-block">     
           <div id="Resort"><label for="selectResort">Desired Disney Resort</label><select class="form-select form-select-sm" aria-label=".form-select-sm example" id="selectResort" name='selectResort' onchange='testResort(this.value)'>
         
-      <option selected>Please Select Your Resort</option>
-      <option value="DLR"> Disneyland Resort</option>
-      <option value="WDW"> Walt Disney World</option>
-    </select>
-    </div>
+            <option selected>Please Select Your Resort</option>
+            <option value="DLR"> Disneyland Resort</option>
+            <option value="WDW"> Walt Disney World</option>
+            </select>
+          </div>
 
-    <div id="DLRdrops" class="DLR hidden">
-    <label for='selectDLRkey'>Your Key Level</label><select id = 'selectDLRkey' class="form-select form-select-sm" aria-label=".form-select-sm example" name='selectDLRkey'>
+          <div id="DLRdrops" class="DLR hidden">
+           <label for='selectDLRkey'>Your Key Level</label><select id = 'selectDLRkey' class="form-select form-select-sm" aria-label=".form-select-sm example" name='selectDLRkey'>
         
-      <option selected> Please Select Your Pass</option>
-      <option value="inspire"> Inspire Key</option>
-      <option value="believe"> Believe Key</option>
-      <option value="enchant"> Enchant Key</option>
-      <option value="imagine"> Imagine Key</option>
-      <option value="imagine"> Imagine Key</option>
-      </select>
-      <label for='selectDLRpark'>Desired Park</label><select class="form-select form-select-sm" id='selectDLRpark' aria-label=".form-select-sm example" name='selectDLRpark'>
+            <option selected> Please Select Your Pass</option>
+            <option value="inspire"> Inspire Key</option>
+            <option value="believe"> Believe Key</option>
+            <option value="enchant"> Enchant Key</option>
+            <option value="imagine"> Imagine Key</option>
+            <option value="imagine"> Imagine Key</option>
+            </select>
+            <label for='selectDLRpark'>Desired Park</label><select class="form-select form-select-sm" id='selectDLRpark' aria-label=".form-select-sm example" name='selectDLRpark'>
       
-        <option selected> Please Select Your Park</option>
-        <option value="DLR_DP">Disneyland</option>
-        <option value="DLR_CA">California Adventure</option>
-        </select>
-    </div>
+              <option selected> Please Select Your Park</option>
+              <option value="DLR_DP">Disneyland</option>
+              <option value="DLR_CA">California Adventure</option>
+              </select>
+          </div>
 
-    <div id="WDWdrops" class="WDW hidden">
-    <label for="selectWDWpass" >Your Pass Level</label><select class="form-select form-select-sm" id = 'selectWDWpass' aria-label=".form-select-sm example" name='selectWDWpass'>
-      <option selected>Please Select your Pass</option>
-      <option value="incredipass"> Incredi-Pass</option>
-      <option value="sorcerer"> Sorcerer Pass</option>
-      <option value="pirate">Pirate Pass</option>
-      <option value="pixie">Pixie Dust Pass</option>
-    </select>
-      <label for='selectWDWpark'>Desired Park</label><select class="form-select form-select-sm" id='selectWDWpark' aria-label=".form-select-sm example" name='selectWDWPark'>
-        <option selected> Please Select Your Park</option>
-        <option value="WDW_MK">Magic Kingdom</option>
-        <option value="WDW_EP">EPCOT</option>
-        <option value="WDW_HS">Hollywood Studios</option>
-        <option value="WDW_AK">Animal Kingdom</option>
-        </select>
+          <div id="WDWdrops" class="WDW hidden">
+          <label for="selectWDWpass" >Your Pass Level</label><select class="form-select form-select-sm" id = 'selectWDWpass' aria-label=".form-select-sm example" name='selectWDWpass'>
+            <option selected>Please Select your Pass</option>
+            <option value="incredipass"> Incredi-Pass</option>
+            <option value="sorcerer"> Sorcerer Pass</option>
+            <option value="pirate">Pirate Pass</option>
+            <option value="pixie">Pixie Dust Pass</option>
+          </select>
+            <label for='selectWDWpark'>Desired Park</label><select class="form-select form-select-sm" id='selectWDWpark' aria-label=".form-select-sm example" name='selectWDWPark'>
+              <option selected> Please Select Your Park</option>
+              <option value="WDW_MK">Magic Kingdom</option>
+              <option value="WDW_EP">EPCOT</option>
+              <option value="WDW_HS">Hollywood Studios</option>
+              <option value="WDW_AK">Animal Kingdom</option>
+              </select>
+          </div>
+          <div class="form-group" class="datepicker" id="calendarForm"> <!-- Date input -->
+            <label class="control-label" for="date">Select your Date</label>
+            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" readonly="true"/>
+          </div>
+          <div class="form-group" id = 'selectDate'> <!-- Submit button -->
+            <button class="btn btn-primary " name="submit" type="submit" id="subButton" onclick='submitForm()'>Submit</button>
+          </div>
+        </div>
+      </div>
     </div>
-    
- 
+    </div>
   </body>
 
     
@@ -75,13 +85,7 @@
 
      
          
-           <div class="form-group" class="datepicker" id="calendarForm"> <!-- Date input -->
-             <label class="control-label" for="date">Select your Date</label>
-             <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" readonly="true"/>
-           </div>
-           <div class="form-group" id = 'selectDate'> <!-- Submit button -->
-             <button class="btn btn-primary " name="submit" type="submit" id="subButton" onclick='submitForm()'>Submit</button>
-           </div>
+           
      
      
       

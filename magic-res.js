@@ -52,12 +52,20 @@ function userData(resort, pass, park, parkDate) {
 	this.date = parkDate;
 }
 
-const apiKey =
+let dlrUrl =
 	"https://disneyland.disney.go.com/passes/blockout-dates/api/get-availability/?product-types=inspire-key-pass,believe-key-pass,enchant-key-pass,imagine-key-pass,dream-key-pass&destinationId=DLR&numMonths=14";
 
-  $.getJSON(apiKey, function(data) {
-    inspire = data[0];
-    currentDate = inspire.availabilities[0];
-    currentAvail = currentDate.slots[0];
-    console.log(currentAvail.available);
-});
+let wdwUrl = 'https://disneyworld.disney.go.com/passes/blockout-dates/api/get-availability/?product-types=disney-incredi-pass,disney-sorcerer-pass,disney-pirate-pass,disney-pixie-dust-pass&destinationId=WDW&numMonths=13'
+
+
+function getResortData(url, park, pass) {
+  fetch(url)
+  .then(response => response.json())
+  .then((result) => {
+    let dlrData = result;
+    console.log(dlrData)});
+    
+  }
+  
+getDLRData(dlrUrl);
+
