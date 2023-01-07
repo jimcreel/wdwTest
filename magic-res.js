@@ -162,6 +162,9 @@ function cardNotification(notificationObject, pass) {
     case "NO_INV":
       reasonText = "reservations are sold out";
       break;
+    case "EXCEED_SOFT_LIMIT":
+      reasonText = "the park is at capacity";
+      break;
   }
   console.log(notificationObject);
   console.log(pass);
@@ -183,7 +186,6 @@ function cardNotification(notificationObject, pass) {
     document.getElementById("card-button").innerHTML = `Get Lost!`;
   }
 }
-
 
 /* if (currentPass[date].slots[0].available) {
 										document.getElementById(
