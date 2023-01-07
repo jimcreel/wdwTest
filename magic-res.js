@@ -80,8 +80,11 @@ function getResortData(url, pass, park, parkDate) {
 								) {
 									nowPark = currentPass[date].facilityId;
 									document.getElementById(
+										"card-text"
+									).innerHTML = `Reservations are available for ${nowPark} on ${parkDate} for ${pass}`
+                  document.getElementById(
 										"card-title"
-									).innerHTML = `Reservations are available for ${nowPark} on ${parkDate} for ${pass}`;
+									).innerHTML = `Success!`;
 								}
 							default: /*returns availability for selected park only*/
 								if (
@@ -90,13 +93,19 @@ function getResortData(url, pass, park, parkDate) {
 								) {
 									if (currentPass[date].slots[0].available) {
 										document.getElementById(
-											"card-title"
+											"card-text"
 										).innerHTML = `Reservations are available for ${park} on ${parkDate} for ${pass}`;
+                    document.getElementById(
+                      "card-title"
+                    ).innerHTML = `Success!`;
 									} else {
 										reason = currentPass[date].slots[0].unavailableReason;
 										document.getElementById(
-											"card-title"
+											"card-text"
 										).innerHTML = `Reservations are not available for ${park} on ${parkDate} because ${reason}`;
+                    document.getElementById(
+                      "card-title"
+                    ).innerHTML = `You're Blocked out, Loser!`;
 									}
 								}
 						}
