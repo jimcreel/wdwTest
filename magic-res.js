@@ -66,7 +66,7 @@ function getResortData(url, pass, park, parkDate) {
 		.then((response) => response.json())
 		.then((result) => {
 			for (const key in result) {
-				currentPass = result[key].passType; /*iterate through pass arrays to find the one that matches selected pass */
+				currentPass = result[key].passType; /*iterate through pass type arrays to find the one that matches selected pass */
 				if (currentPass == pass) {
 					currentPass = result[key].availabilities;
 					for (const date in currentPass) { /*iterate through dates to find the selected date*/
