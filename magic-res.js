@@ -184,7 +184,6 @@ function cardNotification(notificationObject, pass) {
   }
 }
 
-/**/
 
 /* if (currentPass[date].slots[0].available) {
 										document.getElementById(
