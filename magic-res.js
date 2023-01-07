@@ -73,7 +73,7 @@ function getResortData(url, pass, park, parkDate) {
 					for (const date in currentPass) {
 						/*iterate through dates to find the selected date*/
 						switch (park) {
-							case "ANY" /* will return all available parks for the day at selected resort*/:
+							case "ANY": /* will return all available parks for the day at selected resort, but only displays last available park in card*/
 								if (
 									currentPass[date].date == parkDate &&
 									currentPass[date].slots[0].available
