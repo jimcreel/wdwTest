@@ -95,17 +95,20 @@ function getResortData(url, pass, park, parkDate) {
 										document.getElementById(
 											"card-text"
 										).innerHTML = `Reservations are available for ${park} on ${parkDate} for ${pass}`;
-                    document.getElementById(
-                      "card-title"
-                    ).innerHTML = `Success!`;
+								document.getElementById(
+								"card-title"
+								).innerHTML = `Success!`;
 									} else {
 										reason = currentPass[date].slots[0].unavailableReason;
 										document.getElementById(
 											"card-text"
 										).innerHTML = `Reservations are not available for ${park} on ${parkDate} because ${reason}`;
-                    document.getElementById(
-                      "card-title"
-                    ).innerHTML = `You're Blocked out, Loser!`;
+										document.getElementById(
+										"card-title"
+										).innerHTML = `You're Blocked out, Loser!`;
+										document.getElementById(
+											"card-button"
+											).innerHTML = `Get Lost!`;
 									}
 								}
 						}
