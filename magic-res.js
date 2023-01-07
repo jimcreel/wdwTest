@@ -65,7 +65,8 @@ function getResortData(url, pass, park, parkDate) {
 	fetch(url) /* grab array from disney site */
 		.then((response) => response.json())
 		.then((result) => {
-			for (const key in result) {
+      
+      for (const key in result) {
 				currentPass = result[key].passType; /*iterate through pass type arrays to find the one that matches selected pass */
 				if (currentPass == pass) {
 					currentPass = result[key].availabilities;
@@ -76,7 +77,9 @@ function getResortData(url, pass, park, parkDate) {
 									currentPass[date].date == parkDate &&
 									currentPass[date].slots[0].available
 								) {
-									console.log(
+									nowPark = currentPass[date].facilityId
+                  document.getElementById("card-title").innerHTML = `Reservations are available for ${nowPark} on ${parkDate} for ${pass}`
+                  console.log(
 										currentPass[date].date,
 										currentPass[date].facilityId,
 										currentPass[date].slots[0].available
@@ -87,15 +90,17 @@ function getResortData(url, pass, park, parkDate) {
 									currentPass[date].date == parkDate &&
 									currentPass[date].facilityId == park
 								) {
-									console.log(
-										currentPass[date].date,
-										currentPass[date].facilityId,
-										currentPass[date].slots[0].available
-									);
-								}
-						}
-					}
-				}
-			}
-		});
-}
+									if(currentPass[date].slots[0].available){
+                    document.getElementById("card-title").innerHTML = `Reservations are available for ${park} on ${parkDate} for ${pass}`
+                  }
+                  else {
+                    reason = currentPass[date].slots[0].unavailableReason
+                    document.getElementById("card-title").innerHTML = `Reservations are not available for ${park} on ${parkDate} because ${reason}`
+                  }
+                }
+              };
+            }
+          }
+        }
+      });
+    }
