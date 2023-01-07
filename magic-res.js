@@ -44,7 +44,6 @@ function submitForm() {
 	parkDate = document.querySelector("#date").value;
 
 	const result = new userData(resort, pass, park, parkDate);
-	console.log(result);
 
 	getResortData(url, pass, park, parkDate);
 }
@@ -83,11 +82,6 @@ function getResortData(url, pass, park, parkDate) {
 									document.getElementById(
 										"card-title"
 									).innerHTML = `Reservations are available for ${nowPark} on ${parkDate} for ${pass}`;
-									console.log(
-										currentPass[date].date,
-										currentPass[date].facilityId,
-										currentPass[date].slots[0].available
-									);
 								}
 							default: /*returns availability for selected park only*/
 								if (
@@ -103,7 +97,6 @@ function getResortData(url, pass, park, parkDate) {
 										document.getElementById(
 											"card-title"
 										).innerHTML = `Reservations are not available for ${park} on ${parkDate} because ${reason}`;
-										console.log(currentPass[date]);
 									}
 								}
 						}
