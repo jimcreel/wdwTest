@@ -62,41 +62,38 @@ let wdwUrl =
 	"https://disneyworld.disney.go.com/passes/blockout-dates/api/get-availability/?product-types=disney-incredi-pass,disney-sorcerer-pass,disney-pirate-pass,disney-pixie-dust-pass&destinationId=WDW&numMonths=13";
 
 function getResortData(url, pass, park, parkDate) {
-	fetch(url)
+	fetch(url) /* grab array from disney site */
 		.then((response) => response.json())
 		.then((result) => {
 			for (const key in result) {
-				currentPass = result[key].passType;
+				currentPass = result[key].passType; /*iterate through pass arrays to find the one that matches selected pass */
 				if (currentPass == pass) {
 					currentPass = result[key].availabilities;
-					for (const date in currentPass) {
-						
-            switch (park)
-          {
-            case "ANY":
-            if (
-							currentPass[date].date == parkDate &&
-              currentPass[date].slots[0].available
-              
-						) {
-							console.log(
-								currentPass[date].date,
-								currentPass[date].facilityId,
-								currentPass[date].slots[0].available
-							);
+					for (const date in currentPass) { /*iterate through dates to find the selected date*/
+						switch (park) {
+							case "ANY":                   /* will return all available parks for the day at selected resort*/
+								if (
+									currentPass[date].date == parkDate &&
+									currentPass[date].slots[0].available
+								) {
+									console.log(
+										currentPass[date].date,
+										currentPass[date].facilityId,
+										currentPass[date].slots[0].available
+									);
+								}
+							default:                      /*returns availability for selected park only*/
+								if (              
+									currentPass[date].date == parkDate &&
+									currentPass[date].facilityId == park
+								) {
+									console.log(
+										currentPass[date].date,
+										currentPass[date].facilityId,
+										currentPass[date].slots[0].available
+									);
+								}
 						}
-            default:
-              if (
-                
-                currentPass[date].date == parkDate &&
-                currentPass[date].facilityId == park
-              ) {
-                console.log(
-                  currentPass[date].date,
-                  currentPass[date].facilityId,
-                  currentPass[date].slots[0].available);
-              }
-          }
 					}
 				}
 			}
