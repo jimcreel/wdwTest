@@ -9,7 +9,7 @@ $(document).ready(function () {
 		container: container,
 		todayHighlight: true,
 		autoclose: true,
-		startDate: "+1d",
+		startDate: "+0d",
 		endDate: "+90d",
 	};
 	date_input.datepicker(options);
@@ -70,9 +70,14 @@ function getResortData(url, pass, park, parkDate) {
 				if (currentPass == pass) {
 					currentPass = result[key].availabilities;
 					for (const date in currentPass) {
-						if (
+						
+            switch (park)
+          {
+            case "ANY":
+            if (
 							currentPass[date].date == parkDate &&
-							currentPass[date].facilityId == park
+              currentPass[date].slots[0].available
+              
 						) {
 							console.log(
 								currentPass[date].date,
@@ -80,6 +85,18 @@ function getResortData(url, pass, park, parkDate) {
 								currentPass[date].slots[0].available
 							);
 						}
+            default:
+              if (
+                
+                currentPass[date].date == parkDate &&
+                currentPass[date].facilityId == park
+              ) {
+                console.log(
+                  currentPass[date].date,
+                  currentPass[date].facilityId,
+                  currentPass[date].slots[0].available);
+              }
+          }
 					}
 				}
 			}
