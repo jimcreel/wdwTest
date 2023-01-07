@@ -65,42 +65,50 @@ function getResortData(url, pass, park, parkDate) {
 	fetch(url) /* grab array from disney site */
 		.then((response) => response.json())
 		.then((result) => {
-      
-      for (const key in result) {
-				currentPass = result[key].passType; /*iterate through pass type arrays to find the one that matches selected pass */
+			for (const key in result) {
+				currentPass =
+					result[key]
+						.passType; /*iterate through pass type arrays to find the one that matches selected pass */
 				if (currentPass == pass) {
 					currentPass = result[key].availabilities;
-					for (const date in currentPass) { /*iterate through dates to find the selected date*/
+					for (const date in currentPass) {
+						/*iterate through dates to find the selected date*/
 						switch (park) {
-							case "ANY":                   /* will return all available parks for the day at selected resort*/
+							case "ANY" /* will return all available parks for the day at selected resort*/:
 								if (
 									currentPass[date].date == parkDate &&
 									currentPass[date].slots[0].available
 								) {
-									nowPark = currentPass[date].facilityId
-                  document.getElementById("card-title").innerHTML = `Reservations are available for ${nowPark} on ${parkDate} for ${pass}`
-                  console.log(
+									nowPark = currentPass[date].facilityId;
+									document.getElementById(
+										"card-title"
+									).innerHTML = `Reservations are available for ${nowPark} on ${parkDate} for ${pass}`;
+									console.log(
 										currentPass[date].date,
 										currentPass[date].facilityId,
 										currentPass[date].slots[0].available
 									);
 								}
-							default:                      /*returns availability for selected park only*/
-								if (              
+							default: /*returns availability for selected park only*/
+								if (
 									currentPass[date].date == parkDate &&
 									currentPass[date].facilityId == park
 								) {
-									if(currentPass[date].slots[0].available){
-                    document.getElementById("card-title").innerHTML = `Reservations are available for ${park} on ${parkDate} for ${pass}`
-                  }
-                  else {
-                    reason = currentPass[date].slots[0].unavailableReason
-                    document.getElementById("card-title").innerHTML = `Reservations are not available for ${park} on ${parkDate} because ${reason}`
-                  }
-                }
-              };
-            }
-          }
-        }
-      });
-    }
+									if (currentPass[date].slots[0].available) {
+										document.getElementById(
+											"card-title"
+										).innerHTML = `Reservations are available for ${park} on ${parkDate} for ${pass}`;
+									} else {
+										reason = currentPass[date].slots[0].unavailableReason;
+										document.getElementById(
+											"card-title"
+										).innerHTML = `Reservations are not available for ${park} on ${parkDate} because ${reason}`;
+										console.log(currentPass[date]);
+									}
+								}
+						}
+					}
+				}
+			}
+		});
+}
