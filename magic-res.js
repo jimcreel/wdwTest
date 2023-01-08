@@ -64,6 +64,7 @@ function getResortData(url, pass, park, parkDate) {
   fetch(url) /* grab array from disney site */
     .then((response) => response.json())
     .then((result) => {
+      nextWeek(result);
       for (const key in result) {
         currentPass =
           result[key]
@@ -93,6 +94,22 @@ function getResortData(url, pass, park, parkDate) {
     });
 }
 
+function nextWeek (result){
+  inspireExample = result[0].availabilities;
+  dashDate = inspireExample[0].date;
+  dashPass = result[0].passType;
+  dashPark = inspireExample[0].facilityId;
+  dashAvailability = inspireExample[0].slots[0].available;
+  dayArray = [];
+  var weekObject = {};
+  weekObject.date = dashDate;
+  weekObject.park = dashPark;
+  weekObject.availability = dashAvailability;
+  weekObject.pass = dashPass;
+  dayArray.push(weekObject);
+  console.log(dayArray);
+  
+}
 function cardNotification(notificationObject, pass) {
   notifPark = notificationObject.facilityId;
   notifDate = notificationObject.date;
@@ -101,9 +118,7 @@ function cardNotification(notificationObject, pass) {
   var parkText = "";
   var passText = "";
   var reasonText = "";
-  console.log(notifPark);
-  console.log(pass);
-  console.log(reason);
+ 
 
   switch (notifPark) {
     case "DLR_DP":
@@ -158,23 +173,25 @@ function cardNotification(notificationObject, pass) {
   switch (reason) {
     case "BLOCKED":
       reasonText = "you are blocked out";
+      titleText = "You're blocked out, LOSER!"
       break;
     case "NO_INV":
       reasonText = "reservations are sold out";
+      titleText = "Sorry, we're full!"
       break;
     case "EXCEED_SOFT_LIMIT":
       reasonText = "the park is at capacity";
+      titleText = "Sorry, we're full!"
       break;
   }
-  console.log(notificationObject);
-  console.log(pass);
+ 
 
   if (notifAvail == true) {
     notificationObject.facilityId;
     document.getElementById(
       "card-text"
     ).innerHTML = `Reservations are available for ${parkText} on ${notifDate} for ${passText}`;
-    document.getElementById("card-title").innerHTML = `Success!`;
+    document.getElementById("card-title").innerHTML = "Come on Down!";
   } else {
     reason = notificationObject.slots[0].unavailableReason;
     document.getElementById(
@@ -182,7 +199,7 @@ function cardNotification(notificationObject, pass) {
     ).innerHTML = `Reservations are not available for ${parkText} on ${parkDate} because ${reasonText}`;
     document.getElementById(
       "card-title"
-    ).innerHTML = `You're Blocked out, Loser!`;
+    ).innerHTML = titleText;
     document.getElementById("card-button").innerHTML = `Get Lost!`;
   }
 }
