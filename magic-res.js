@@ -253,7 +253,7 @@ function cardNotification(notificationObject, pass) {
 	switch (reason) {
 		case "BLOCKED":
 			reasonText = "you are blocked out";
-			titleText = "You're blocked out, LOSER!";
+			titleText = "Date Blocked Out";
 			break;
 		case "NO_INV":
 			reasonText = "reservations are sold out";
