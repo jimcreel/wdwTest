@@ -136,7 +136,9 @@ function getResortData(url, pass, park, parkDate) {
 								}
 							}
 						}
+						
 					}
+					displayWeek(weekArray);
 				}
 			}
 		});
@@ -145,7 +147,6 @@ function getResortData(url, pass, park, parkDate) {
 /* function to display weekly data on the right third*/
 function displayWeek(weekArray) {
 	var currentNode = document.getElementById("displayWeek");
-	var currentElement = document.createElement("br");
 	for (element in weekArray) {
 		console.log(weekArray[element].date);
 		var displayDate = weekArray[element].date;
