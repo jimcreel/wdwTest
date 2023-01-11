@@ -1,2 +1,5 @@
 .DS_Store
 
+wdwAvailability.json
+.gitignore
+jsc/jscharting.js
