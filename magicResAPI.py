@@ -23,4 +23,4 @@ def main(resort):
     print(parse_json)
     return parse_json
 
-main('WDW')
+main()
