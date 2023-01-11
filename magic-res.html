@@ -187,8 +187,66 @@
               </div>
                 
 
-							<div class="col-xs-4">three</div>
-						</div>
+							<div class="col-xs-4 calendarSelector" id = 'thirdColumn'>
+								<div id="weekResort">
+									<label for="weekResort">Disney Resort</label
+									><select
+										class="form-select form-select-sm"
+										id="weekSelectResort"
+										name="weekSelectResort"
+										onchange="weekResortCheck(this.value)"
+									>
+										<option selected>Please Select Your Resort</option>
+										<option value="DLR">Disneyland Resort</option>
+										<option value="WDW">Walt Disney World</option>
+									</select>
+								</div>
+	
+								<div id="weekDLR" class="DLR hidden">
+									<label for="selectDLRkey">Your Key Level</label
+									><select
+										id="weekSelectDLRkey"
+										class="form-select form-select-sm"
+										name="selectDLRkey"
+										
+									>
+										<option selected>Please Select Your Pass</option>
+										<option value="inspire-key-pass">Inspire Key</option>
+										<option value="believe-key-pass">Believe Key</option>
+										<option value="enchant-key-pass">Enchant Key</option>
+										<option value="imagine-key-pass">Imagine Key</option>
+										<option value="dream-key-pass">Dream Key</option>
+									</select>
+									</div>
+
+								<div id="weekWDW" class="WDW hidden">
+									<label for="selectWDWpass">Your Pass Level</label
+									><select
+										id="weekSelectWDWpass"
+										name="selectWDWpass"
+										class="form-select form-select-sm"
+									>
+										<option selected>Please Select your Pass</option>
+										<option value="disney-incredi-pass">Incredi-Pass</option>
+										<option value="disney-sorcerer-pass">Sorcerer Pass</option>
+										<option value="disney-pirate-pass">Pirate Pass</option>
+										<option value="disney-pixie-dust-pass">Pixie Dust Pass</option>
+									</select>
+								</div>	
+								
+								<div  id="setWeekly">
+									<!-- Submit button -->
+									<button
+										class="btn btn-primary"
+										name="weekSubmit"
+										type="submit"
+										id="weekButton"
+										onclick="weekCalendar()"
+									>
+										Submit
+									</button>
+									<p id="displayWeek"></p>
+								</div>
 					</div>
 				</div>
 			</div>

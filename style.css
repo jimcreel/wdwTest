@@ -7,3 +7,14 @@
 #calendarSelector {
     max-width: 250px;
 }
+
+#displayWeek {
+    max-width:250px;
+    text-align: right;
+}
+
+#thirdColumn {
+    max-height: 250px;
+    flex-wrap: wrap;
+    
+}
