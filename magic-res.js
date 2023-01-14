@@ -1,8 +1,8 @@
 let dlrUrl =
-	"https://disneyland.disney.go.com/passes/blockout-dates/api/get-availability/?product-types=inspire-key-pass,believe-key-pass,enchant-key-pass,imagine-key-pass,dream-key-pass&destinationId=DLR&numMonths=14";
+	"http://ec2-34-217-57-69.us-west-2.compute.amazonaws.com:5000/DLR";
 
 let wdwUrl =
-	"https://disneyworld.disney.go.com/passes/blockout-dates/api/get-availability/?product-types=disney-incredi-pass,disney-sorcerer-pass,disney-pirate-pass,disney-pixie-dust-pass&destinationId=WDW&numMonths=13";
+	"http://ec2-34-217-57-69.us-west-2.compute.amazonaws.com:5000/WDW";
 
 $(document).ready(function () {
 	var date_input = $('input[name="date"]'); //our date input has the name "date"
@@ -65,7 +65,7 @@ function submitForm() {
 	}
 	parkDate = document.querySelector("#date").value;
 
-	const result = new userData(resort, pass, park, parkDate);
+	
 
 	getResortData(url, pass, park, parkDate);
 }
