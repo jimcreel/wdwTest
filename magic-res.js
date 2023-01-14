@@ -64,8 +64,7 @@ function submitForm() {
 		url = wdwUrl;
 	}
 	parkDate = document.querySelector("#date").value;
-
-	
+	document.getElementById("displayWeek").classList.add("hidden");	
 
 	getResortData(url, pass, park, parkDate);
 }
@@ -86,7 +85,6 @@ function getResortData(url, pass, park, parkDate) {
 		.then((response) => response.json())
 		.then((result) => {
 			var weekArray = [];
-			var dayArray = [];
 			listLength = 7;
 			for (let i = 0; i < listLength; i++) {
 				itemDate = new Date();
@@ -196,6 +194,7 @@ function parkObject(weekPark, weekAvailable, weekReason) {
 
 function weekCalendar() {
 	weekResort = document.querySelector("#weekSelectResort").value;
+	document.getElementById("displayWeek").classList.remove("hidden");
 	document.getElementById("displayWeek").innerHTML = "";
 
 	if (weekResort == "DLR") {
