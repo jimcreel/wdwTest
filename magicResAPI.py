@@ -5,7 +5,7 @@ from flask_restful import Api, Resource
 app = Flask(__name__)
 api = Api(app)
 
-
+#api to return DLR availability
 class DLR(Resource):
            
         def get(userResort: str):
