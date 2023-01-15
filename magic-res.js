@@ -1,8 +1,8 @@
 let dlrUrl =
-	"http://ec2-34-217-57-69.us-west-2.compute.amazonaws.com:5000/DLR";
+	"https://jctnqgdxx6.us-west-2.awsapprunner.com/DLR";
 
 let wdwUrl =
-	"http://ec2-34-217-57-69.us-west-2.compute.amazonaws.com:5000/WDW";
+	"https://jctnqgdxx6.us-west-2.awsapprunner.com/WDW";
 
 $(document).ready(function () {
 	var date_input = $('input[name="date"]'); //our date input has the name "date"
