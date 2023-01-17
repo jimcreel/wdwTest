@@ -9,7 +9,7 @@
 }
 
 #displayWeek {
-    max-width:250px;
+    
     text-align: right;
 }
 
@@ -18,3 +18,9 @@
     flex-wrap: wrap;
     
 }
+
+.week {
+    min-width: 150px;
+    max-width: 200px;
+}
+

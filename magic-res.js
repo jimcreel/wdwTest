@@ -35,6 +35,16 @@ function testResort(val) {
 
 /* hide and remove contextual menus depending on resort */
 function weekResortCheck(val) {
+  const weekStatus = document.getElementById("weekCalendar").classList.contains("hidden")
+  if (!weekStatus) {
+    document.getElementById("weekCalendar").classList.toggle("hidden");
+  }
+  
+  let listLength = 7;
+  for (let x = 0; x < listLength; x++) {
+    delTxt = `week${x}Text`;
+    document.getElementById(delTxt).innerHTML=""
+  }
   if (val == "DLR") {
     document.getElementById("weekDLR").classList.remove("hidden");
     document.getElementById("weekWDW").classList.add("hidden");
@@ -50,7 +60,10 @@ function weekResortCheck(val) {
 /* aggregate data from the form to send to the park checker */
 function submitForm() {
   resort = document.querySelector("#selectResort").value;
-
+  const weekStatus = document.getElementById("weekCalendar").classList.contains("hidden")
+  if (!weekStatus) {
+    document.getElementById("weekCalendar").classList.toggle("hidden");
+  }
   if (resort == "DLR") {
     pass = document.querySelector("#selectDLRkey").value;
     park = document.querySelector("#selectDLRpark").value;
@@ -62,8 +75,8 @@ function submitForm() {
     url = wdwUrl;
   }
   parkDate = document.querySelector("#date").value;
-  document.getElementById("displayWeek").classList.add("hidden");
-
+  
+  
   getResortData(url, pass, park, parkDate);
 }
 
@@ -134,6 +147,7 @@ function getResortData(url, pass, park, parkDate) {
             }
           }
           displayWeek(weekArray);
+          console.log(weekArray)
         }
       }
     });
@@ -143,13 +157,17 @@ function getResortData(url, pass, park, parkDate) {
 function displayWeek(weekArray) {
   var currentNode = document.getElementById("displayWeek");
   for (element in weekArray) {
-    console.log(weekArray[element].date);
+    
     var displayDate = weekArray[element].date;
-    text = document.createTextNode(`${displayDate}`);
-    currentNode.appendChild(document.createElement("br"));
-    currentNode.appendChild(text);
-    currentNode.appendChild(document.createElement("br"));
-    currentNode.appendChild(document.createElement("br"));
+    var weekDay = new Date(displayDate).toLocaleDateString("en-US", { weekday: "long"});
+    
+    var formatDate = `${weekDay} ${displayDate}`
+    
+    var weekCard = `week${element}Title`
+    var weekText = `week${element}Text`
+    console.log(weekText)
+    document.getElementById(weekCard).innerHTML = `${formatDate}`
+
     parkArray = weekArray[element].slot;
     for (iterPark in parkArray) {
       var displayPark = parkArray[iterPark].park;
@@ -170,10 +188,10 @@ function displayWeek(weekArray) {
           textReason = "AVAILABLE";
           break;
       }
-
-      text = document.createTextNode(`${displayPark} ${textReason}`);
-      currentNode.appendChild(text);
-      currentNode.appendChild(document.createElement("br"));
+      cardText = document.getElementById(weekText).innerHTML
+      newText = `${cardText} \n ${displayPark} - ${textReason}`
+      console.log(newText)
+      document.getElementById(weekText).innerHTML = newText
     }
   }
 }
@@ -189,10 +207,17 @@ function parkObject(weekPark, weekAvailable, weekReason) {
   this.reason = weekReason;
 }
 
+
 function weekCalendar() {
+  let listLength = 7;
+  for (let x = 0; x < listLength; x++) {
+    delTxt = `week${x}Text`;
+    document.getElementById(delTxt).innerHTML=""
+  }
   weekResort = document.querySelector("#weekSelectResort").value;
-  document.getElementById("displayWeek").classList.remove("hidden");
-  document.getElementById("displayWeek").innerHTML = "";
+  document.getElementById("weekCalendar").classList.toggle("hidden");
+  var arrayLength = 7;
+  
 
   if (weekResort == "DLR") {
     weekPass = document.querySelector("#weekSelectDLRkey").value;
@@ -274,7 +299,7 @@ function cardNotification(notificationObject, pass) {
       "card-text"
     ).innerHTML = `Reservations are not available for ${notifPark} on ${parkDate} because ${reasonText}`;
     document.getElementById("card-title").innerHTML = titleText;
-    document.getElementById("card-button").innerHTML = `Get Lost!`;
+    document.getElementById("card-button").innerHTML = `Sorry`;
   }
 }
 
